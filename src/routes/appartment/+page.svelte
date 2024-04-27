@@ -111,12 +111,12 @@
 
 	let rooms;
 	let area;
-	let price = '...'
+	let price = '???'
 	let selected;
 	function handleSubmit() {
 		let url =
             PUBLIC_BASE_URL +
-            "/api/prediction/apartment?bfs_number=" +
+            "/api/predict/?bfs_number=" +
             selected.id +
             "&area=" +
             area +
@@ -127,30 +127,54 @@
             price = 'CHF ' + response.data;
         });
 	}
+	
 </script>
+
 <div class="container text-center">
 
-	<h1>Are you paying to much? Our model predicts that you should be paying {price}</h1>
-
-	<div class="row justify-content-md-center">
-	  <div class="col col-lg-2">
-		<input type="number" class="form-control" placeholder="area" aria-label="area" bind:value={area}>
+	<h1 class="description">Please enter the settings of your choice!</h1>
+	
+	<div class="d-flex flex-column align-items-center">
+	  <div class="my-2 w-50">
+		<input type="number" class="form-control" placeholder="Area" aria-label="Area" bind:value={area}>
 	  </div>
-	  <div class="col col-lg-2">
-		<input type="number" class="form-control" placeholder="rooms" aria-label="rooms" bind:value={rooms}>
+	  <div class="my-2 w-50">
+		<input type="number" class="form-control" placeholder="Rooms" aria-label="Rooms" bind:value={rooms}>
 	  </div>
-	  <div class="col col-lg-2">
-
+	  <div class="my-2 w-50">
 		<select class="form-select" bind:value={selected}>
-			{#each bfs_number_names as bfs}
-				<option value={bfs}>
-					{bfs.name}
-				</option>
-			{/each}
+		  {#each bfs_number_names as bfs}
+			<option value={bfs}>{bfs.name}</option>
+		  {/each}
 		</select>
 	  </div>
-	  <div class="col-md-auto">
-		<button type="button" class="btn btn-primary" on:click={handleSubmit}>price estimation</button>
+	  <div class="my-2 w-50">
+		<button type="button" class="btn" on:click={handleSubmit}>Price Estimation</button>
 	  </div>
 	</div>
+  
+	<h1 class="results">
+		Based on your inputs, you should be paying: 
+		<span style="color: {price !== '???' ? 'darkred' : 'inherit'}">{price}</span>
+	</h1>
+  
   </div>
+  
+  <style>
+	.description {
+	  margin-bottom: 30px;
+	}
+  
+	.results {
+	  margin-top: 30px;
+	  font-weight: bold;
+	}
+
+	.btn {
+		background-color: darkred;
+		border-radius: 90px;
+		color: white;
+		font-weight: bold;
+	}
+  </style>
+  
