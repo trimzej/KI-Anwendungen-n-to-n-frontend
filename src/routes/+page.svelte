@@ -7,7 +7,7 @@
     h1 {
         margin-bottom: 30px;
         font-weight: bold;
-        color: darkred;
+        color: blue;
     }
 
     p {
