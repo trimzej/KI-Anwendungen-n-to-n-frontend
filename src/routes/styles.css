@@ -1,0 +1,18 @@
+/* Other styles ... */
+
+.navbar {
+    background-color: #ffffff; /* Sets the navbar color to white */
+  }
+  
+  /* If you need to style the nav-link specifically */
+  .nav-link {
+    color: #ffffff !important; /* Sets the text color to black, override Bootstrap colors */
+  }
+  
+  /* Optionally, if you need to adjust the navbar-brand color */
+  .navbar-brand {
+    color: #ffffff !important;
+  }
+  
+  /* Other styles ... */
+  

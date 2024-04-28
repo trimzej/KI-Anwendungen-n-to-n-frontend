@@ -130,51 +130,113 @@
 	
 </script>
 
-<div class="container text-center">
+<div class="container">
+    <h1 class="title">Apartment Price Estimator</h1>
+    
+    <p class="tagline">Discover the fair rental price for your apartment.</p>
+    
+    <div class="input-group">
+        <input type="number" class="input-control" placeholder="Area (sqm)" bind:value={area}>
+        <input type="number" class="input-control" placeholder="Number of Rooms" bind:value={rooms}>
+        <select class="input-select" bind:value={selected}>
+            {#each bfs_number_names as bfs}
+                <option value={bfs}>{bfs.name}</option>
+            {/each}
+        </select>
+        <button class="estimate-btn" on:click={handleSubmit}>Estimate Price</button>
+    </div>
+    
+    <div class="price-result">
+        <p class="price-text">Estimated monthly rent:</p>
+        <h2 class="price">{price}</h2>
+    </div>
+</div>
 
-	<h1 class="description">Please enter the settings of your choice!</h1>
-	
-	<div class="d-flex flex-column align-items-center">
-	  <div class="my-2 w-50">
-		<input type="number" class="form-control" placeholder="Area" aria-label="Area" bind:value={area}>
-	  </div>
-	  <div class="my-2 w-50">
-		<input type="number" class="form-control" placeholder="Rooms" aria-label="Rooms" bind:value={rooms}>
-	  </div>
-	  <div class="my-2 w-50">
-		<select class="form-select" bind:value={selected}>
-		  {#each bfs_number_names as bfs}
-			<option value={bfs}>{bfs.name}</option>
-		  {/each}
-		</select>
-	  </div>
-	  <div class="my-2 w-50">
-		<button type="button" class="btn" on:click={handleSubmit}>Price Estimation</button>
-	  </div>
-	</div>
-  
-	<h1 class="results">
-		Based on your inputs, you should be paying: 
-		<span style="color: {price !== '???' ? 'darkred' : 'inherit'}">{price}</span>
-	</h1>
-  
-  </div>
-  
-  <style>
-	.description {
-	  margin-bottom: 30px;
-	}
-  
-	.results {
-	  margin-top: 30px;
-	  font-weight: bold;
-	}
+<style>
+    .container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #ffffff; /* white background */
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        font-family: 'Helvetica Neue', sans-serif;
+    }
 
-	.btn {
-		background-color: darkred;
-		border-radius: 90px;
-		color: white;
-		font-weight: bold;
-	}
-  </style>
-  
+    .title {
+        font-size: 2rem;
+        color: #34495e; /* dark blue-grey */
+        margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+        font-size: 1.1rem;
+        color: #7f8c8d; /* grey */
+        margin-bottom: 2rem;
+    }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .input-control, .input-select {
+        padding: 0.8rem;
+        border: 2px solid #bdc3c7; /* light grey border */
+        border-radius: 10px;
+        font-size: 1rem;
+        outline: none; /* Removes the default focus outline */
+        transition: border-color 0.2s; /* Smooth transition for border color */
+    }
+
+    .input-control:focus, .input-select:focus {
+        border-color: #3498db; /* Light blue border on focus */
+    }
+
+    .input-select {
+        appearance: none; /* Removes default style of select dropdown */
+        background-position: right 0.7rem center; /* Position for custom arrow icon */
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+
+	.estimate-btn {
+    padding: 0.8rem 2rem;
+    background-color: #5DADE2; /* Comforting blue color */
+    color: #ffffff; /* white text */
+    border: none;
+
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s; /* Smooth background color and transform transitions */
+    will-change: transform; /* Optimizes for transform property */
+}
+
+.estimate-btn:hover {
+    background-color: #3498DB; /* Slightly darker blue on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+
+    .price-result {
+        padding: 1.5rem;
+        background: #ecf0f1; /* light grey background */
+        border-radius: 10px;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06); /* Inner shadow for depth */
+    }
+
+    .price-text {
+        color: #34495e; /* dark blue-grey */
+        margin-bottom: 0.5rem;
+    }
+
+    .price {
+        font-size: 2rem;
+        color: #2ecc71; /* green */
+        font-weight: 700;
+        margin-top: 0;
+    }
+</style>
